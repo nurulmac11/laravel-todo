@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia';
+import {defineStore} from 'pinia';
 import {fetchWrapper} from "@/helpers/fetch-wrapper";
 import router from "@/router";
 import {useAlertStore} from "@/stores/alert";
@@ -19,7 +19,7 @@ export const useAuthStore = defineStore({
     actions: {
         async login(username: string, password: string) {
             try {
-                const jwt = await fetchWrapper.post(`${baseUrl}/login`, { email: username, password: password });
+                const jwt = await fetchWrapper.post(`${baseUrl}/login`, {email: username, password: password});
 
                 // store user details and jwt in local storage to keep user logged in between page refreshes
                 localStorage.setItem('access_token', jwt.access_token);
@@ -29,6 +29,25 @@ export const useAuthStore = defineStore({
                 localStorage.setItem('user', JSON.stringify(user));
                 this.user = user;
 
+                // redirect to previous url or default to home page
+                await router.push(this.returnUrl || '/');
+            } catch (error: any) {
+                const alertStore = useAlertStore();
+                alertStore.error(error);
+            }
+        },
+        async register(name: string, username: string, password: string) {
+            try {
+                const response = await fetchWrapper.post(`${baseUrl}/register`, {
+                    name: name,
+                    email: username,
+                    password: password
+                });
+                if (response.status > 300) {
+                    throw new Error(response);
+                }
+                const alertStore = useAlertStore();
+                alertStore.success("Successfully registered! You can now login.");
                 // redirect to previous url or default to home page
                 await router.push(this.returnUrl || '/');
             } catch (error: any) {

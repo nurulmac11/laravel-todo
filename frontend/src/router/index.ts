@@ -21,13 +21,18 @@ const router = createRouter({
       path: '/logout',
       name: 'logout',
       component: () => import('../views/LogoutView.vue')
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import('../views/RegisterView.vue')
     }
   ]
 })
 router.beforeEach(async (to) => {
   // clear alert on route change
   const alertStore = useAlertStore();
-  alertStore.clear();
+  // alertStore.clear();
 
   // redirect to login page if not logged in and trying to access a restricted page
   const publicPages = ['/login', '/register'];

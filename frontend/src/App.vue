@@ -22,6 +22,9 @@ const { accessToken } = storeToRefs(authStore);
             <li class="nav-item" v-if="!accessToken">
               <RouterLink to="/login" active-class="active" class="nav-link">Login</RouterLink>
             </li>
+            <li class="nav-item" v-if="!accessToken">
+              <RouterLink to="/register" active-class="active" class="nav-link">Register</RouterLink>
+            </li>
             <li class="nav-item" v-if="accessToken">
               <RouterLink to="/logout" active-class="active" class="nav-link">Logout</RouterLink>
             </li>
@@ -29,10 +32,9 @@ const { accessToken } = storeToRefs(authStore);
         </div>
       </div>
     </nav>
-
+    <Alert />
     <main class="container">
       <RouterView />
-
     </main>
     <footer class="pt-5 my-5 text-muted border-top">
       Created by the Bootstrap team &middot; &copy; 2022

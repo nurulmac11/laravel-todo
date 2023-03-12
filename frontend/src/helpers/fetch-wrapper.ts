@@ -17,6 +17,8 @@ function request(method: any) {
             // @ts-ignore
             requestOptions.headers[`Content-Type`] = 'application/json';
             // @ts-ignore
+            requestOptions.headers['Accept'] = 'application/json';
+            // @ts-ignore
             requestOptions.body = JSON.stringify(body);
         }
         // @ts-ignore

@@ -12,7 +12,7 @@ async function onSubmit(e) {
 </script>
 
 <template>
-  <div class="about">
+  <div>
     <h1>This is signin page</h1>
     <form @submit="onSubmit">
       <div class="mb-3">
