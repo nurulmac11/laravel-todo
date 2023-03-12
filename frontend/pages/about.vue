@@ -3,9 +3,10 @@ about page
   <NuxtLink to="/">home</NuxtLink>
 </template>
 
-<script>
+<script >
 export default {
-  name: "about"
+  name: "about",
+
 }
 </script>
 

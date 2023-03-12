@@ -5,7 +5,12 @@ Index page
 
 <script>
 export default {
-  name: "index"
+  name: "index",
+  head() {
+    return {
+      title: "Nuxt todo index",
+    }
+  }
 }
 </script>
 
