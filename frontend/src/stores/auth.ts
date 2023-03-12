@@ -8,13 +8,14 @@ const baseUrl = `${import.meta.env.VITE_BASE_URL}/auth`;
 console.log(baseUrl);
 export const useAuthStore = defineStore({
     id: 'auth',
-    state: () => ({
-        alert: {},
-        // user: JSON.parse(localStorage.getItem('user')),
-        user: {},
-        returnUrl: "",
-        accessToken: ""
-    }),
+    state: () => {
+        return {
+            alert: {},
+            user: JSON.parse(localStorage.getItem('user') || ""),
+            returnUrl: "",
+            accessToken: localStorage.getItem('access_token') || "",
+        }
+    },
     actions: {
         async login(username: string, password: string) {
             try {
@@ -22,10 +23,14 @@ export const useAuthStore = defineStore({
 
                 // store user details and jwt in local storage to keep user logged in between page refreshes
                 localStorage.setItem('access_token', jwt.access_token);
-                this.accessToken = jwt.accessToken;
+                this.accessToken = jwt.access_token;
+
+                const user = await fetchWrapper.get(`${baseUrl}/me`, '');
+                localStorage.setItem('user', JSON.stringify(user));
+                this.user = user;
 
                 // redirect to previous url or default to home page
-                router.push(this.returnUrl || '/');
+                await router.push(this.returnUrl || '/');
             } catch (error: any) {
                 const alertStore = useAlertStore();
                 alertStore.error(error);

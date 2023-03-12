@@ -28,11 +28,11 @@ function request(method: any) {
 
 function authHeader(url: string) {
     // return auth header with jwt if user is logged in and request is to the api url
-    const { user } = useAuthStore();
-    const isLoggedIn = !!user?.token;
-    const isApiUrl = url.startsWith(import.meta.env.BASE_URL);
+    const { accessToken } = useAuthStore();
+    const isLoggedIn = !!accessToken;
+    const isApiUrl = url.startsWith(import.meta.env.VITE_BASE_URL);
     if (isLoggedIn && isApiUrl) {
-        return { Authorization: `Bearer ${user.token}` };
+        return { Authorization: `Bearer ${accessToken}` };
     } else {
         return {};
     }

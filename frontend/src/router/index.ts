@@ -4,7 +4,7 @@ import {useAlertStore} from "@/stores/alert";
 import {useAuthStore} from "@/stores/auth";
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.VITE_BASE_URL),
+  history: createWebHistory(),
   linkActiveClass: 'active',
   routes: [
     {
@@ -32,7 +32,7 @@ router.beforeEach(async (to) => {
   const authRequired = !publicPages.includes(to.path);
   const authStore = useAuthStore();
 
-  if (authRequired && !authStore.user) {
+  if (authRequired && !authStore.accessToken) {
     authStore.returnUrl = to.fullPath;
     return '/login';
   }
