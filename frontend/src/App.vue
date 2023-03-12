@@ -19,14 +19,19 @@ const { accessToken } = storeToRefs(authStore);
             <li class="nav-item">
               <RouterLink to="/" active-class="active" class="nav-link">Home</RouterLink>
             </li>
+
+            <li class="nav-item" v-if="accessToken">
+              <RouterLink to="/todo" active-class="active" class="nav-link">Todo</RouterLink>
+            </li>
+            <li class="nav-item" v-if="accessToken">
+              <RouterLink to="/logout" active-class="active" class="nav-link">Logout</RouterLink>
+            </li>
+
             <li class="nav-item" v-if="!accessToken">
               <RouterLink to="/login" active-class="active" class="nav-link">Login</RouterLink>
             </li>
             <li class="nav-item" v-if="!accessToken">
               <RouterLink to="/register" active-class="active" class="nav-link">Register</RouterLink>
-            </li>
-            <li class="nav-item" v-if="accessToken">
-              <RouterLink to="/logout" active-class="active" class="nav-link">Logout</RouterLink>
             </li>
           </ul>
         </div>
