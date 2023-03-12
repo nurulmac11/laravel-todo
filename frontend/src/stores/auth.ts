@@ -5,13 +5,13 @@ import {useAlertStore} from "@/stores/alert";
 
 
 const baseUrl = `${import.meta.env.VITE_BASE_URL}/auth`;
-console.log(baseUrl);
+
 export const useAuthStore = defineStore({
     id: 'auth',
     state: () => {
         return {
             alert: {},
-            user: JSON.parse(localStorage.getItem('user') || ""),
+            user: JSON.parse(localStorage.getItem('user') || "{}"),
             returnUrl: "",
             accessToken: localStorage.getItem('access_token') || "",
         }
@@ -38,7 +38,9 @@ export const useAuthStore = defineStore({
         },
         logout() {
             this.user = {};
+            this.accessToken = "";
             localStorage.removeItem('user');
+            localStorage.removeItem('access_token');
             router.push('/login');
         }
     }

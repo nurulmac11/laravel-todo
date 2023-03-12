@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import {useAuthStore} from "@/stores/auth";
+import {storeToRefs} from "pinia";
+const authStore = useAuthStore();
+const { accessToken } = storeToRefs(authStore);
 </script>
 
 <template>
@@ -13,10 +17,13 @@ import { RouterLink, RouterView } from 'vue-router'
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <RouterLink to="/" class="nav-link">Home</RouterLink>
+              <RouterLink to="/" active-class="active" class="nav-link">Home</RouterLink>
             </li>
-            <li class="nav-item">
-              <RouterLink to="/login" class="nav-link">Login</RouterLink>
+            <li class="nav-item" v-if="!accessToken">
+              <RouterLink to="/login" active-class="active" class="nav-link">Login</RouterLink>
+            </li>
+            <li class="nav-item" v-if="accessToken">
+              <RouterLink to="/logout" active-class="active" class="nav-link">Logout</RouterLink>
             </li>
           </ul>
         </div>
