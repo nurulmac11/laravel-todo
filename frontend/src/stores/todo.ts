@@ -22,6 +22,15 @@ export const useTodoStore = defineStore({
             }
         },
         async removeTodo(id: number) {
+            try {
+                await fetchWrapper.delete(`${baseUrl}/${id}`, {
+                }).then(() =>{
+                    this.getTodos();
+                });
+            } catch (error: any) {
+                const alertStore = useAlertStore();
+                alertStore.error(error);
+            }
         },
         async completeTodo(id: number) {
             try {
@@ -49,9 +58,11 @@ export const useTodoStore = defineStore({
         },
         async addTodo(todo: string) {
             try {
-                this.todos = await fetchWrapper.post(`${baseUrl}`, {
+                await fetchWrapper.post(`${baseUrl}`, {
                     name: todo,
                     todo_group_id: 1
+                }).then((r) => {
+                    this.getTodos();
                 });
             } catch (error: any) {
                 const alertStore = useAlertStore();

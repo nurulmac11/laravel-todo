@@ -42,12 +42,8 @@ const addTodo = (todo: string) => {
         </div></div>
         <ol class="list-group list-group-numbered">
           <Todo v-for="todo in todos"
-                :id="todo.id"
-                :completed="todo.completed"
-                :title="todo.title"
-                :description="todo.description"
-                :group_name="todo.group_name"
                 :key="todo.id"
+                :todo="todo"
           />
         </ol>
       </section>

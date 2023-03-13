@@ -1,40 +1,46 @@
 <script setup lang="ts">
 
 import {useTodoStore} from "@/stores/todo";
-import {computed, ref, toRef} from "vue";
+import {toRefs} from "vue";
 
-const props = defineProps(['completed', 'id', 'description', 'title', 'group_name'])
+const props = defineProps(['todo'])
 
-const completed = toRef(props, 'completed')
-const id = toRef(props, 'id')
-const description = toRef(props, 'description')
-const title = toRef(props, 'title')
-const group_name = toRef(props, 'group_name')
-
+const {todo} = toRefs(props);
 
 const todoStore = useTodoStore();
 
 const completedToggle = () => {
-  if (completed.value == 0) {
-    todoStore.completeTodo(id.value);
+  if (todo?.value.completed == 0) {
+    todoStore.completeTodo(todo.value.id);
   } else {
-    todoStore.incompleteTodo(id.value);
+    todoStore.incompleteTodo(todo?.value.id);
+  }
+}
+const remove = () => {
+  if (todo?.value) {
+    todoStore.removeTodo(todo?.value.id)
   }
 }
 </script>
 
 
 <template>
-  <li class="list-group-item d-flex justify-content-between align-items-start">
+  <li class="list-group-item d-flex justify-content-between align-items-start" :key="todo.id">
     <div class="ms-2 me-auto">
-      <div class="fw-bold" :class="{'todo-done': completed}">{{ title }}</div>
-      <p>{{ description }} - {{ group_name }}</p>
+      <div class="fw-bold" :class="{'todo-done': todo.completed}">{{ todo.title }}</div>
+      <p>{{ todo.description }} - {{ todo.group_name }}</p>
     </div>
     <span class="badge bg-primary"><button
         class="btn"
         @click="completedToggle"
     >
-          {{ completed? "✗" : "✓" }}
+          {{ todo.completed ? "✗" : "✓" }}
+        </button></span>
+    <span class="badge bg-primary"><button
+        class="btn"
+        @click="remove"
+    >
+          <font-awesome-icon icon="fa-solid fa-trash" />
         </button></span>
   </li>
 </template>
@@ -43,9 +49,11 @@ const completedToggle = () => {
 .btn {
   color: white;
 }
+
 .btn:hover {
   color: red;
 }
+
 .todo-done {
   color: red;
   text-decoration: line-through;
