@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Todo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class TodoController extends Controller
@@ -41,11 +42,21 @@ class TodoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Todo $todo)
     {
-        $this->validate($request, ['name' => 'max:255']);
+        $validator = Validator::make($request->all(), [
+            'name' => 'max:255'
+        ]);
 
-        $todo = Todo::find($id)->where('user_id', JWTAuth::user()->id);
+        $validator->after(function($validator) use($todo) {
+            if($todo->user_id != JWTAuth::user()->id)
+            {
+                $validator->errors()->add('user_id', 'Not owner of this resource');
+            }
+        });
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
         $todo->update($request->all());
         return $todo;
     }
