@@ -28,7 +28,9 @@ const remove = () => {
   <li class="list-group-item d-flex justify-content-between align-items-start" :key="todo.id">
     <div class="ms-2 me-auto">
       <div class="fw-bold" :class="{'todo-done': todo.completed}">{{ todo.title }}</div>
-      <p>{{ todo.description }} - {{ todo.group_name }} - {{todo.priority }}</p>
+      <p>Group: {{ todo.group_name }}</p>
+      <p>Priority: {{todo.priority}}</p>
+      <p>Due date: {{todo.due_date}}</p>
     </div>
     <span class="badge bg-primary"><button
         class="btn"

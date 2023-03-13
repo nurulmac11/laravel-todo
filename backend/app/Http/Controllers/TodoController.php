@@ -28,7 +28,8 @@ class TodoController extends Controller
             'name' => $request->get('name'),
             'user_id' => JWTAuth::user()->id,
             'todo_group_id' => $request->get('todo_group_id'),
-            'priority' => $request->get('priority')
+            'priority' => $request->get('priority'),
+            'due_date' => $request->get('due_date'),
         ]);
     }
 

@@ -68,12 +68,13 @@ export const useTodoStore = defineStore({
                 alertStore.error(error);
             }
         },
-        async addTodo(todo: string, todoGroupId: number, priority: number) {
+        async addTodo(todo: string, todoGroupId: number, priority: number, date: any) {
             try {
                 await fetchWrapper.post(`${baseUrl}`, {
                     name: todo,
                     todo_group_id: todoGroupId,
-                    priority: priority
+                    priority: priority,
+                    due_date: date
                 }).then((r) => {
                     this.getTodos();
                 });
