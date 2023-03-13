@@ -27,7 +27,8 @@ class TodoController extends Controller
         return Todo::create([
             'name' => $request->get('name'),
             'user_id' => JWTAuth::user()->id,
-            'todo_group_id' => $request->get('todo_group_id')
+            'todo_group_id' => $request->get('todo_group_id'),
+            'priority' => $request->get('priority')
         ]);
     }
 
@@ -67,5 +68,10 @@ class TodoController extends Controller
     public function destroy(string $id)
     {
         return Todo::where('user_id', JWTAuth::user()->id)->where('id', $id)->delete();
+    }
+
+    public function getPriorities() {
+        return json_encode(Todo::getPriorities(), JSON_FORCE_OBJECT);
+//        return Todo::getPriorities();
     }
 }

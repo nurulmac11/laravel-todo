@@ -10,7 +10,7 @@ class Todo extends Model
 {
     use HasFactory;
 
-    public array $priority_list = [
+    static public array $priority_list = [
         0 => "Minor",
         1 => "Medium",
         2 => "High",
@@ -49,6 +49,10 @@ class Todo extends Model
             ->leftJoin('todo_groups', 'todo_groups.id', '=', 'todos.todo_group_id')->where('todos.user_id', '=', $user_id)
             ->orderBy('todos.id', 'DESC')
             ->get();
+    }
+
+    static public function getPriorities() {
+        return TODO::$priority_list;
     }
 
 }

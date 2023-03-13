@@ -30,6 +30,7 @@ Route::group([
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('todos/priorities', [TodoController::class, 'getPriorities']);
     Route::apiResources([
         'todos' => TodoController::class,
         'todo-groups' => TodoGroupController::class
