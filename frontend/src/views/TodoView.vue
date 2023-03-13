@@ -7,8 +7,16 @@ import Todo from "@/components/Todo.vue";
 
 const todoStore = useTodoStore();
 const newTodo = ref("")
+
 todoStore.getTodos();
+
 const {todos} = storeToRefs(todoStore);
+
+const addTodo = (todo: string) => {
+  todoStore.addTodo(todo);
+  newTodo.value = '';
+}
+
 </script>
 
 <template>
@@ -21,21 +29,26 @@ const {todos} = storeToRefs(todoStore);
           <input type="text"
                  class="form-control"
                  v-model="newTodo"
-                 @keyup.enter="todoStore.addTodo(newTodo)"
+                 @keyup.enter="addTodo(newTodo)"
                  placeholder="New task"
           >
         </div>
         <div class="col-1">
-          <button @click="todoStore.addTodo(newTodo)"
+          <button @click="addTodo(newTodo)"
                   class="btn btn-primary mb-3"
           >
             <i class="fa fa-plus"></i> Add
           </button>
         </div></div>
         <ol class="list-group list-group-numbered">
-          <Todo v-for="(todo, index) in todos"
-                :todo="todo"
-                :key="todo.id"/>
+          <Todo v-for="todo in todos"
+                :id="todo.id"
+                :completed="todo.completed"
+                :title="todo.title"
+                :description="todo.description"
+                :group_name="todo.group_name"
+                :key="todo.id"
+          />
         </ol>
       </section>
 

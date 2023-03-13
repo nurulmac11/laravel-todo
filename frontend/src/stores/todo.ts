@@ -24,6 +24,28 @@ export const useTodoStore = defineStore({
         async removeTodo(id: number) {
         },
         async completeTodo(id: number) {
+            try {
+                await fetchWrapper.patch(`${baseUrl}/${id}`, {
+                    completed: true
+                }).then(() => {
+                    this.getTodos();
+                });
+            } catch (error: any) {
+                const alertStore = useAlertStore();
+                alertStore.error(error);
+            }
+        },
+        async incompleteTodo(id: number) {
+            try {
+                await fetchWrapper.patch(`${baseUrl}/${id}`, {
+                    completed: false
+                }).then(() =>{
+                    this.getTodos();
+                });
+            } catch (error: any) {
+                const alertStore = useAlertStore();
+                alertStore.error(error);
+            }
         },
         async addTodo(todo: string) {
             try {
