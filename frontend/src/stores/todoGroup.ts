@@ -9,13 +9,18 @@ export const useTodoGroupStore = defineStore({
     id: 'todo-groups',
     state: () => {
         return {
-            todoGroups : []
+            todoGroups : [],
+            firstTodoId: null,
         }
     },
     actions: {
         async getTodoGroups() {
             try {
-                this.todoGroups = await fetchWrapper.get(`${baseUrl}`, '');
+                let groups = await fetchWrapper.get(`${baseUrl}`, '');
+                this.todoGroups = groups;
+                if (groups.length) {
+                    this.firstTodoId = groups[0].id;
+                }
             } catch (error: any) {
                 const alertStore = useAlertStore();
                 alertStore.error(error);

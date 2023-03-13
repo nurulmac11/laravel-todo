@@ -56,11 +56,11 @@ export const useTodoStore = defineStore({
                 alertStore.error(error);
             }
         },
-        async addTodo(todo: string) {
+        async addTodo(todo: string, todoGroupId: number) {
             try {
                 await fetchWrapper.post(`${baseUrl}`, {
                     name: todo,
-                    todo_group_id: 1
+                    todo_group_id: todoGroupId
                 }).then((r) => {
                     this.getTodos();
                 });
