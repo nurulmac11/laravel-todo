@@ -11,10 +11,43 @@ export const useTodoStore = defineStore({
         return {
             todos : [],
             priorities: {},
-            defaultPriority: 1
+            defaultPriority: 1,
+            filters: {
+                completed: true,
+                priority: 0,
+                group: null
+            }
+        }
+    },
+    getters: {
+        filteredTodos: (state) => {
+            let filters = state.filters;
+            let f1 = state.todos;
+            if (filters.completed) {
+                // @ts-ignore
+                f1 = f1.filter((todo) => !todo.completed)
+            }
+            if (filters.priority > 0) {
+                // @ts-ignore
+                f1 = f1.filter((todo) => todo.priority == filters.priority)
+            }
+            if (filters.group) {
+                // @ts-ignore
+                f1 = f1.filter((todo) => todo.todo_group_id == filters.group)
+            }
+            return f1;
+        },
+        activeTodos: (state) =>
+        {
+            // @ts-ignore
+            return state.todos.filter((todo) => !todo.completed)
         }
     },
     actions: {
+        addFilter(filter: string, val: any) {
+            // @ts-ignore
+            this.filters[filter] = val;
+        },
         async getTodos() {
             try {
                 this.todos = await fetchWrapper.get(`${baseUrl}`, '');
@@ -27,7 +60,6 @@ export const useTodoStore = defineStore({
             try {
                 let p = await fetchWrapper.get(`${baseUrl}/priorities`, '');
                 this.priorities = JSON.parse(p);
-                console.log(p,'fuck???')
             } catch (error: any) {
                 const alertStore = useAlertStore();
                 alertStore.error(error);

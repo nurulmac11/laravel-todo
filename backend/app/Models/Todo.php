@@ -11,10 +11,10 @@ class Todo extends Model
     use HasFactory;
 
     static public array $priority_list = [
-        0 => "Minor",
-        1 => "Medium",
-        2 => "High",
-        3 => "Critical"
+        1 => "Minor",
+        2 => "Medium",
+        3 => "High",
+        4 => "Critical"
     ];
 
     /**
