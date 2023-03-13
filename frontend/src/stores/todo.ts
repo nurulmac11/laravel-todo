@@ -21,5 +21,20 @@ export const useTodoStore = defineStore({
                 alertStore.error(error);
             }
         },
+        async removeTodo(id: number) {
+        },
+        async completeTodo(id: number) {
+        },
+        async addTodo(todo: string) {
+            try {
+                this.todos = await fetchWrapper.post(`${baseUrl}`, {
+                    name: todo,
+                    todo_group_id: 1
+                });
+            } catch (error: any) {
+                const alertStore = useAlertStore();
+                alertStore.error(error);
+            }
+        },
     }
 });
