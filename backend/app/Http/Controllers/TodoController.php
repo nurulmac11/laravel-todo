@@ -13,7 +13,7 @@ class TodoController extends Controller
      */
     public function index()
     {
-        return Todo::where('user_id', JWTAuth::user()->id)->get();
+        return Todo::getTodos(JWTAuth::user()->id);
     }
 
     /**
