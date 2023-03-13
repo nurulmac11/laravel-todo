@@ -37,7 +37,7 @@ const addTodo = (todo: string, todoGroup: number) => {
                    class="form-control"
                    v-model="newTodo"
                    @keyup.enter="addTodo(newTodo)"
-                   placeholder="New task"
+                   placeholder="New todo"
             >
           </div>
 

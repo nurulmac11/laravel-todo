@@ -30,7 +30,7 @@ const addTodoGroup = (todoGroup: string) => {
                  class="form-control"
                  v-model="newTodoGroup"
                  @keyup.enter="addTodoGroup(newTodoGroup)"
-                 placeholder="New task"
+                 placeholder="New todo group"
           >
         </div>
         <div class="col-1">

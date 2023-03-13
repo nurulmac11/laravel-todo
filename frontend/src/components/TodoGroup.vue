@@ -39,9 +39,4 @@ const remove = () => {
 .btn:hover {
   color: red;
 }
-
-.todo-done {
-  color: red;
-  text-decoration: line-through;
-}
 </style>
