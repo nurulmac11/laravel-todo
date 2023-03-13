@@ -28,6 +28,11 @@ const router = createRouter({
       component: () => import('../views/TodoView.vue')
     },
     {
+      path: '/todo-groups',
+      name: 'todo-groups',
+      component: () => import('../views/TodoGroupView.vue')
+    },
+    {
       path: '/register',
       name: 'register',
       component: () => import('../views/RegisterView.vue')
