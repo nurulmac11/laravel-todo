@@ -13,7 +13,7 @@ class TodoGroupController extends Controller
      */
     public function index()
     {
-        return TodoGroup::all();
+        return TodoGroup::where('user_id', JWTAuth::user()->id)->get();
     }
 
     /**
