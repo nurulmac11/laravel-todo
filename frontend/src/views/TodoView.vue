@@ -11,16 +11,18 @@ const todoGroupStore = useTodoGroupStore();
 
 
 todoStore.getTodos();
+todoStore.getPriorities();
 todoGroupStore.getTodoGroups();
 
-const {todos} = storeToRefs(todoStore);
+const {todos, priorities, defaultPriority} = storeToRefs(todoStore);
 const {todoGroups, firstTodoId} = storeToRefs(todoGroupStore);
 
 const newTodo = ref("")
 const newTodoGroup = ref(firstTodoId);
+const newPriority = ref(defaultPriority)
 
-const addTodo = (todo: string, todoGroup: number) => {
-  todoStore.addTodo(todo, todoGroup);
+const addTodo = (todo: string, todoGroup: number, priority: number) => {
+  todoStore.addTodo(todo, todoGroup, priority);
   newTodo.value = '';
 }
 
@@ -32,22 +34,26 @@ const addTodo = (todo: string, todoGroup: number) => {
       <h1>Todo list</h1>
       <section class="todos">
         <div class="row g-3">
-          <div class="col-8">
+          <div class="col-5">
             <input type="text"
                    class="form-control"
                    v-model="newTodo"
-                   @keyup.enter="addTodo(newTodo)"
+                   @keyup.enter="addTodo(newTodo, newTodoGroup, newPriority)"
                    placeholder="New todo"
             >
           </div>
-
+          <div class="col-3">
+            <select v-model="newPriority" class="form-select" aria-label="Default select example">
+              <option :value="key" v-for="(priority, key) in priorities">{{ priority }}</option>
+            </select>
+          </div>
           <div class="col-3">
             <select v-model="newTodoGroup" class="form-select" aria-label="Default select example">
               <option :value="todoGroup.id" v-for="(todoGroup, index) in todoGroups">{{ todoGroup.name}}</option>
             </select>
           </div>
           <div class="col-1">
-            <button @click="addTodo(newTodo, newTodoGroup)"
+            <button @click="addTodo(newTodo, newTodoGroup, newPriority)"
                     class="btn btn-primary mb-3"
             >
               <i class="fa fa-plus"></i> Add

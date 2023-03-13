@@ -41,10 +41,11 @@ function authHeader(url: string) {
     }
 }
 
-async function handleResponse(response: {headers: object, json: any, ok: boolean, status: number}) {
+// async function handleResponse(response: {headers: object, json: any, ok: boolean, status: number, data: any, body:any}) {
+async function handleResponse(response: any) {
     // @ts-ignore
     const isJson = response.headers?.get('content-type')?.includes('application/json');
-    const data = isJson ? await response.json() : null;
+    const data = isJson ? await response.json() : response.text();
 
     // check for error response
     if (!response.ok) {
