@@ -13,4 +13,8 @@ npm install
 cd ../
 docker-compose up --build
 ```
-This command build laravel, nginx and vuejs services. After that project will be ready to use on `http://localhost:81`
+This command build laravel, nginx and vuejs services, vuejs dependencies, php dependencies.
+Wait until you see 
+laravel-todo-frontend-1  | VITE v4.1.4  ready in 540 ms
+on the terminal.
+After that project will be ready to use on `http://localhost:81`
