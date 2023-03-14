@@ -32,6 +32,11 @@ class Todo extends Model
         'due_date'
     ];
 
+    public function getPriorityAttribute($value)
+    {
+        return TODO::$priority_list[$value];
+    }
+
     static public function getTodos(int $user_id)
     {
         return DB::table('todos')
