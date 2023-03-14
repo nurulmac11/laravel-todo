@@ -8,9 +8,6 @@ In this project I'm demonstrating an advanced todo example with users, jwt auth,
 Build services;
 
 ```shell
-cd frontend
-npm install
-cd ../
 docker-compose up --build
 ```
 This command build laravel, nginx and vuejs services, vuejs dependencies, php dependencies.
