@@ -30,6 +30,7 @@ class TodoController extends Controller
             'todo_group_id' => $request->get('todo_group_id'),
             'priority' => $request->get('priority'),
             'due_date' => $request->get('due_date'),
+            'description' => ''
         ]);
     }
 

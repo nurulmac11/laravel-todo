@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('todos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->text('description')->default('');
+            $table->text('description');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('todo_group_id');
             $table->smallInteger('priority')->default(1);
