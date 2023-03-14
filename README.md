@@ -1,6 +1,6 @@
 # Advanced todo example laravel 10 and vuejs 3
 
-In this project I'm demonstrating an advanced todo example with users, jwt auth, todo groups, dockerization and server with nginx also I have used vuejs composition api to get familiar.
+In this project I'm demonstrating an advanced todo example with users, jwt auth, todo groups, dockerization and server with nginx also I have used vuejs composition api to get familiar with it.
 
 ## Getting Started
 
