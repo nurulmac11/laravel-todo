@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ffa162a9-74ef-4d65-a856-9ea87e12123c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/TodoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/TodoController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/migrations/2023_03_06_200121_create_todos_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/migrations/2023_03_06_200121_create_todos_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/vite.config.ts" afterDir="false" />
-    </list>
+    <list default="true" id="ffa162a9-74ef-4d65-a856-9ea87e12123c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -201,7 +194,7 @@
       <workItem from="1678487930785" duration="19000" />
       <workItem from="1678609641254" duration="1886000" />
       <workItem from="1678743105777" duration="1750000" />
-      <workItem from="1678745297727" duration="2600000" />
+      <workItem from="1678745297727" duration="2917000" />
     </task>
     <task id="LOCAL-00001" summary="polish routes">
       <created>1678609734506</created>
@@ -210,7 +203,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678609734506</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="docker compose added and configured accordingly.">
+      <created>1678776538904</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1678776538904</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,6 +218,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="polish routes" />
-    <option name="LAST_COMMIT_MESSAGE" value="polish routes" />
+    <MESSAGE value="docker compose added and configured accordingly." />
+    <option name="LAST_COMMIT_MESSAGE" value="docker compose added and configured accordingly." />
   </component>
 </project>
