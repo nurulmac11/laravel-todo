@@ -47,9 +47,9 @@ export const useAuthStore = defineStore({
                     throw new Error(response);
                 }
                 const alertStore = useAlertStore();
-                alertStore.success("Successfully registered! You can now login.");
                 // redirect to previous url or default to home page
                 await router.push(this.returnUrl || '/');
+                alertStore.success("Successfully registered! You can now login.");
             } catch (error: any) {
                 const alertStore = useAlertStore();
                 alertStore.error(error);
