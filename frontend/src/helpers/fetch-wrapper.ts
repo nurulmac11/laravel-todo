@@ -12,13 +12,13 @@ function request(method: any) {
     return (url: string, body: any) => {
         const requestOptions = {
             method,
-            headers: authHeader(url)
+            headers: authHeader(url),
         };
+        // @ts-ignore
+        requestOptions.headers['Accept'] = 'application/json';
         if (body) {
             // @ts-ignore
             requestOptions.headers[`Content-Type`] = 'application/json';
-            // @ts-ignore
-            requestOptions.headers['Accept'] = 'application/json';
             // @ts-ignore
             requestOptions.body = JSON.stringify(body);
         }

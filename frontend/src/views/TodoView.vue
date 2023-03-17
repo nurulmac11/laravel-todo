@@ -5,6 +5,7 @@ import {storeToRefs} from "pinia";
 import {ref} from "vue";
 import Todo from "@/components/Todo.vue";
 import {useTodoGroupStore} from "@/stores/todoGroup";
+import PrioritySelector from "@/components/PrioritySelector.vue";
 
 const todoStore = useTodoStore();
 const todoGroupStore = useTodoGroupStore();
@@ -15,7 +16,7 @@ todoStore.getPriorities();
 todoGroupStore.getTodoGroups();
 
 // retrieve via ref required variables
-const {todos, priorities, defaultPriority, filteredTodos} = storeToRefs(todoStore);
+const {priorities, defaultPriority, filteredTodos} = storeToRefs(todoStore);
 const {todoGroups, firstTodoId} = storeToRefs(todoGroupStore);
 
 const newTodo = ref("")
@@ -36,8 +37,8 @@ const addTodo = (todo: string, todoGroup: number, priority: number, date: any) =
 const completedFilterChange = () => {
   todoStore.addFilter('completed', completedFilter);
 }
-const priorityFilterChange = () => {
-  todoStore.addFilter('priority', priorityFilter);
+const priorityFilterChange = (val: any) => {
+  todoStore.addFilter('priority', val);
 }
 
 const groupFilterChange = () => {
@@ -67,10 +68,10 @@ const groupFilterChange = () => {
 
         <div class="row g-3 mt-1">
           <div class="col-4">
-            <select @change="priorityFilterChange" v-model="priorityFilter" class="form-select" aria-label="Priority filter">
-              <option value="0">Select priority filter</option>
-              <option :value="key" v-for="(priority, key) in priorities">{{ priority }}</option>
-            </select>
+            <PrioritySelector
+                v-model="priorityFilter"
+                @update:modelValue="priorityFilterChange"
+            />
           </div>
         </div>
 
