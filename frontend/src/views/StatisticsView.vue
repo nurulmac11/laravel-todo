@@ -31,7 +31,10 @@ statStore.init();
       <ul>
         <li :key="user.id" v-for="user in groupGT15">{{ user.name }} - {{ user.total }}</li>
       </ul>
-      {{top5Group}}
+      Top 5 Users By Group:
+      <ul>
+        <li :key="user.id" v-for="user in top5Group">{{ user.name }} - {{ user.total }}</li>
+      </ul>
     </div>
   </main>
 </template>
