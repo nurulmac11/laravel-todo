@@ -74,6 +74,5 @@ class TodoController extends Controller
 
     public function getPriorities() {
         return json_encode(Todo::getPriorities(), JSON_FORCE_OBJECT);
-//        return Todo::getPriorities();
     }
 }

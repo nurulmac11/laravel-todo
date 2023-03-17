@@ -21,8 +21,11 @@ export const useTodoStore = defineStore({
     },
     getters: {
         filteredTodos: (state) => {
-            let filters = state.filters;
+            const filters = state.filters;
             let f1 = state.todos;
+            if (!filters) {
+                return f1;
+            }
             if (filters.completed) {
                 // @ts-ignore
                 f1 = f1.filter((todo) => !todo.completed)
@@ -58,7 +61,7 @@ export const useTodoStore = defineStore({
         },
         async getPriorities() {
             try {
-                let p = await fetchWrapper.get(`${baseUrl}/priorities`, '');
+                const p = await fetchWrapper.get(`${baseUrl}/priorities`, '');
                 this.priorities = JSON.parse(p);
             } catch (error: any) {
                 const alertStore = useAlertStore();

@@ -27,6 +27,9 @@ const { accessToken } = storeToRefs(authStore);
               <RouterLink to="/todo-groups" active-class="active" class="nav-link">Todo Groups</RouterLink>
             </li>
             <li class="nav-item" v-if="accessToken">
+              <RouterLink to="/stats" active-class="active" class="nav-link">Stats</RouterLink>
+            </li>
+            <li class="nav-item" v-if="accessToken">
               <RouterLink to="/logout" active-class="active" class="nav-link">Logout</RouterLink>
             </li>
 

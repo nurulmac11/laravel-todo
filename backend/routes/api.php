@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\StatsController;
 use App\Http\Controllers\TodoController;
 use App\Http\Controllers\TodoGroupController;
 use Illuminate\Http\Request;
@@ -31,6 +32,7 @@ Route::group([
 
 Route::middleware('auth')->group(function () {
     Route::get('todos/priorities', [TodoController::class, 'getPriorities']);
+    Route::get('stats/todo', [StatsController ::class, 'todo_count']);
     Route::apiResources([
         'todos' => TodoController::class,
         'todo-groups' => TodoGroupController::class
