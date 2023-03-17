@@ -115,5 +115,22 @@ export const useTodoStore = defineStore({
                 alertStore.error(error);
             }
         },
+
+        async updateTodo(todoId: number, todo: string, todoGroupId: number, priority: number, date: any) {
+            try {
+                await fetchWrapper.put(`${baseUrl}/${todoId}`, {
+                    id: todoId,
+                    name: todo,
+                    todo_group_id: todoGroupId,
+                    priority: priority,
+                    due_date: date
+                }).then((r) => {
+                    this.getTodos();
+                });
+            } catch (error: any) {
+                const alertStore = useAlertStore();
+                alertStore.error(error);
+            }
+        },
     }
 });

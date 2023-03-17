@@ -18,9 +18,9 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faPencil, faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 // add icons to the library
-library.add(faUserSecret, faTrash)
+library.add(faUserSecret, faTrash, faPencil, faFloppyDisk);
 
 const app = createApp(App)
 

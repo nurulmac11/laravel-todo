@@ -33,20 +33,17 @@ class Todo extends Model
         'due_date'
     ];
 
-    public function getPriorityAttribute($value)
+    protected $appends = ['priority_string'];
+
+    public function getPriorityStringAttribute()
     {
+        $value = $this->attributes['priority'];
         if (is_int($value)) {
             return TODO::$priority_list[$value];
         }
         return $value;
     }
 
-    protected function priority(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => $this->getPriorityAttribute($value),
-        );
-    }
 
 
     static public function getTodos(int $user_id)
