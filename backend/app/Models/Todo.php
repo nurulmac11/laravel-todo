@@ -37,6 +37,9 @@ class Todo extends Model
 
     public function getPriorityStringAttribute()
     {
+        if (!array_key_exists('priority', $this->attributes)) {
+            return '';
+        }
         $value = $this->attributes['priority'];
         if (is_int($value)) {
             return TODO::$priority_list[$value];
@@ -60,7 +63,11 @@ class Todo extends Model
                 "todos.created_at",
                 "todos.updated_at",
             ]
-        )->join('todo_groups', 'todo_groups.id', '=', 'todos.todo_group_id')->orderBy('todos.id', 'DESC')->get();
+        )
+            ->join('todo_groups', 'todo_groups.id', '=', 'todos.todo_group_id')
+            ->orderBy('todos.id', 'DESC')
+            ->where('todos.user_id', $user_id)
+            ->get();
     }
 
     static public function getPriorities() {

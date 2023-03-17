@@ -9,20 +9,25 @@ export const useStatStore = defineStore({
     id: 'stat',
     state: () => {
         return {
-            todos : [],
-            priorities: {},
-            defaultPriority: 1,
-            todoCount: 0
+            todoCount: 0,
+            topTen: {}
         }
     },
     getters: {
-        activeTodos: (state) =>
-        {
-            // @ts-ignore
-            return state.todos.filter((todo) => !todo.completed)
-        }
     },
     actions: {
+        async init() {
+          this.getTopTen();
+          this.getTodoCount();
+        },
+        async getTopTen() {
+            try {
+                this.topTen = await fetchWrapper.get(`${baseUrl}/top-ten`, '');
+            } catch (error: any) {
+                const alertStore = useAlertStore();
+                alertStore.error(error);
+            }
+        },
         async getTodoCount() {
             try {
                 this.todoCount = await fetchWrapper.get(`${baseUrl}/todo`, '');
