@@ -10,15 +10,32 @@ export const useStatStore = defineStore({
     state: () => {
         return {
             todoCount: 0,
+            groupCounts: {},
             topTen: {}
         }
     },
     getters: {
+        // @ts-ignore
+        groupLT5 () {
+            // @ts-ignore
+            return this.groupCounts.filter((user) => user.total < 5)
+        },
+        // @ts-ignore
+        group515 () {
+            // @ts-ignore
+            return this.groupCounts.filter((user) => user.total > 5 && user.total < 15)
+        },
+        // @ts-ignore
+        groupGT15 () {
+            // @ts-ignore
+            return this.groupCounts.filter((user) => user.total > 15)
+        },
     },
     actions: {
         async init() {
           this.getTopTen();
           this.getTodoCount();
+          this.getGroupCounts();
         },
         async getTopTen() {
             try {
@@ -31,6 +48,14 @@ export const useStatStore = defineStore({
         async getTodoCount() {
             try {
                 this.todoCount = await fetchWrapper.get(`${baseUrl}/todo`, '');
+            } catch (error: any) {
+                const alertStore = useAlertStore();
+                alertStore.error(error);
+            }
+        },
+        async getGroupCounts() {
+            try {
+                this.groupCounts = await fetchWrapper.get(`${baseUrl}/group-counts`, '');
             } catch (error: any) {
                 const alertStore = useAlertStore();
                 alertStore.error(error);
