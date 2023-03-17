@@ -11,7 +11,8 @@ export const useStatStore = defineStore({
         return {
             todoCount: 0,
             groupCounts: {},
-            topTen: {}
+            topTen: {},
+            top5Group: {},
         }
     },
     getters: {
@@ -36,6 +37,7 @@ export const useStatStore = defineStore({
           this.getTopTen();
           this.getTodoCount();
           this.getGroupCounts();
+          this.getTop5Group();
         },
         async getTopTen() {
             try {
@@ -56,6 +58,14 @@ export const useStatStore = defineStore({
         async getGroupCounts() {
             try {
                 this.groupCounts = await fetchWrapper.get(`${baseUrl}/group-counts`, '');
+            } catch (error: any) {
+                const alertStore = useAlertStore();
+                alertStore.error(error);
+            }
+        },
+        async getTop5Group() {
+            try {
+                this.top5Group= await fetchWrapper.get(`${baseUrl}/top5-groups`, '');
             } catch (error: any) {
                 const alertStore = useAlertStore();
                 alertStore.error(error);
