@@ -6,6 +6,8 @@ import {ref} from "vue";
 import Todo from "@/components/Todo.vue";
 import {useTodoGroupStore} from "@/stores/todoGroup";
 import PrioritySelector from "@/components/PrioritySelector.vue";
+import TodoGroup from "@/components/TodoGroup.vue";
+import TodoGroupSelector from "@/components/TodoGroupSelector.vue";
 
 const todoStore = useTodoStore();
 const todoGroupStore = useTodoGroupStore();
@@ -16,8 +18,8 @@ todoStore.getPriorities();
 todoGroupStore.getTodoGroups();
 
 // retrieve via ref required variables
-const {priorities, defaultPriority, filteredTodos} = storeToRefs(todoStore);
-const {todoGroups, firstTodoId} = storeToRefs(todoGroupStore);
+const {defaultPriority, filteredTodos} = storeToRefs(todoStore);
+const {firstTodoId} = storeToRefs(todoGroupStore);
 
 const newTodo = ref("")
 const newTodoGroup = ref(firstTodoId);
@@ -77,10 +79,10 @@ const groupFilterChange = () => {
 
         <div class="row g-3 mt-1">
           <div class="col-4">
-            <select @change="groupFilterChange" v-model="groupFilter" class="form-select" aria-label="Priority filter">
-              <option value="0">Select group filter</option>
-              <option :value="group.id" v-for="(group, key) in todoGroups">{{ group.name }}</option>
-            </select>
+            <TodoGroupSelector
+                v-model="groupFilter"
+                @update:modelValue="groupFilterChange"
+            />
           </div>
         </div>
         <hr/>
@@ -95,14 +97,14 @@ const groupFilterChange = () => {
             >
           </div>
           <div class="col-3">
-            <select v-model="newPriority" class="form-select" aria-label="Select priority">
-              <option :value="key" v-for="(priority, key) in priorities">{{ priority }}</option>
-            </select>
+            <PrioritySelector
+                v-model="newPriority"
+            />
           </div>
           <div class="col-3">
-            <select v-model="newTodoGroup" class="form-select" aria-label="Select group">
-              <option :value="todoGroup.id" v-for="(todoGroup, index) in todoGroups">{{ todoGroup.name }}</option>
-            </select>
+            <TodoGroupSelector
+              v-model="newTodoGroup"
+              />
           </div>
         </div>
         <div class="row g-3 mt-1">

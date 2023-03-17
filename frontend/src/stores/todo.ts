@@ -31,7 +31,7 @@ export const useTodoStore = defineStore({
                 // @ts-ignore
                 f1 = f1.filter((todo) => todo.priority == filters.priority)
             }
-            if (filters.group) {
+            if (filters.group > 0) {
                 // @ts-ignore
                 f1 = f1.filter((todo) => todo.todo_group_id == filters.group)
             }
