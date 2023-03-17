@@ -19,15 +19,49 @@ class TodoFactory extends Factory
      */
     public function definition(): array
     {
+        $user = User::factory()->create();
         return [
             'name' => fake()->name(),
             'description' => '',
-            'user_id' => User::factory(),
-            'todo_group_id' => TodoGroup::factory(),
-            'prioririty' => 1,
+            'user_id' => $user,
+            'todo_group_id' => TodoGroup::factory()->withUser($user),
+            'priority' => fake()->numberBetween(1,3),
             'completed' => 0,
-            'due-date' => "12/12/2023"
+            'due_date' => "2023-03-21"
         ];
     }
+
+    public function withCompleted(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            $user = User::factory()->create();
+            return [
+                'name' => fake()->name(),
+                'description' => '',
+                'user_id' => $user,
+                'todo_group_id' => TodoGroup::factory()->withUser($user),
+                'priority' => fake()->numberBetween(1,3),
+                'completed' => 1,
+                'due_date' => "2023-03-21"
+            ];
+        });
+    }
+
+    public function withIncompleted(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            $user = User::factory()->create();
+            return [
+                'name' => fake()->name(),
+                'description' => '',
+                'user_id' => $user,
+                'todo_group_id' => TodoGroup::factory()->withUser($user),
+                'priority' => fake()->numberBetween(1,3),
+                'completed' => 0,
+                'due_date' => "2023-03-21"
+            ];
+        });
+    }
+
 
 }

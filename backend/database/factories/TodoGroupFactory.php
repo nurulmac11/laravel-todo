@@ -22,4 +22,11 @@ class TodoGroupFactory extends Factory
             'user_id' => User::factory(),
         ];
     }
+    public function withUser($id)
+    {
+        return $this->state([
+            'name' => fake()->name(),
+            'user_id' => $id,
+        ]);
+    }
 }
